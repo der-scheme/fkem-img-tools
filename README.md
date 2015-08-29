@@ -33,14 +33,16 @@ It is as follows:
 2. swap partition
 3. root partition, formatted as ext4—expand as necessary
 
-    Disk fk-server-minimal.img: 4 GiB, 4294967296 bytes, 8388608 sectors
-    Units: sectors of 1 * 512 = 512 bytes
-    Sector size (logical/physical): 512 bytes / 512 bytes
-    I/O size (minimum/optimal): 512 bytes / 512 bytes
-    Disklabel type: dos
-    Disk identifier: 0x156e24e6
+```
+Disk fk-server-minimal.img: 4 GiB, 4294967296 bytes, 8388608 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos
+Disk identifier: 0x156e24e6
 
-    Device                 Boot   Start     End Sectors  Size Id Type
-    fk-server-minimal.img1 *       2048  411647  409600  200M  7 HPFS/NTFS/exFAT
-    fk-server-minimal.img2       411648 2508799 2097152    1G 82 Linux swap / Solaris
-    fk-server-minimal.img3      2508800 8388607 5879808  2.8G 83 Linux
+Device                 Boot   Start     End Sectors  Size Id Type
+fk-server-minimal.img1 *       2048  411647  409600  200M  7 HPFS/NTFS/exFAT
+fk-server-minimal.img2       411648 2508799 2097152    1G 82 Linux swap / Solaris
+fk-server-minimal.img3      2508800 8388607 5879808  2.8G 83 Linux
+```
