@@ -108,6 +108,11 @@ while getopts ':b:s:i:h' opt; do
   esac
 done
 shift $(($OPTIND - 1))
+
+if [ "$1"x = x ]; then
+  print_usage
+fi
+
 IMG="$1"
 
 fallocate -l "$IMAGE_SIZE" "$IMG"
