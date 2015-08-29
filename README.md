@@ -6,23 +6,26 @@ systems for the creation of RedHat systems *of the same architecture*.
 
 ## Basic usage
 
-To create a basic OS image, download the release RPM for your target system
-(i.e. `centos-release-7-0.1406.el7.centos.2.3.x86_64.rpm`) and
-run the following command:
+To create a basic OS image, first create an image file with default filesystem
+settings by running:
+
+```bash
+sudo ./fkem-img-create.sh fk-server-test.img
+```
+
+Then download the release RPM for your target system (i.e.
+`centos-release-7-0.1406.el7.centos.2.3.x86_64.rpm`) and run:
 
 ```bash
 sudo ./img-bootstrap.sh fk-server-test.img centos-release-7-0.1406.el7.centos.2.3.x86_64.rpm
 ```
 
-This will create and bootstrap the image file `fk-server-test.img` with default
-filesystem settings and a few basic packages. To work on your newly created
-image, simply run:
+To bootstrap the image file `fk-server-test.img` with  a few basic packages. To
+work on your newly created image in an interactive bash, simply run:
 
 ```bash
 sudo ./img-chroot.sh fk-server-test.img
 ```
-
-This will open an interactive bash shell on your image.
 
 ## Default partition layout
 
