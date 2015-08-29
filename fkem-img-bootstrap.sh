@@ -57,6 +57,11 @@ while getopts ':hm:p:' opt; do
   esac
 done
 shift $(($OPTIND - 1))
+
+if [ "$2"x = x ]; then
+  print_usage
+fi
+
 IMG="$1"
 RELEASE_RPM="$2"
 
