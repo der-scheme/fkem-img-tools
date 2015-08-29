@@ -73,11 +73,7 @@ rpm --root "$MNT" -i $RELEASE_RPM
 
 # We import the GPG keys. Since RPM can't import the debug keys CentOS ships
 # with, we exclude those from globbing.
-# We also work around the fact that shopt will return a non-zero exit value if
-# extglob was disabled previously.
-shopt extglob > /dev/null || true
-rpm --root "$MNT" --import "$MNT"/etc/pki/rpm-gpg/!(*Debug*)
-shopt -u extglob > /dev/null || true
+bash -O extglob -c 'rpm --root "$MNT" --import "$MNT"/etc/pki/rpm-gpg/!(*Debug*)'
 
 # Install base packages
 dnf --assumeyes --installroot="$MNT" install \
