@@ -6,7 +6,7 @@ set -e
 # Callback function that gets executed if the script terminates prematurely and
 # correctly unmounts the image file.
 on_error () {
-  ./fkem-img-free "$IMG"
+  ./fkem-img-free.sh "$IMG"
 }
 # Note that in this script (only), the trap is set after looping the image.
 
