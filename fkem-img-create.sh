@@ -119,7 +119,7 @@ fallocate -l "$IMAGE_SIZE" "$IMG"
 fallocate -z -l  "$IMAGE_SIZE" "$IMG"
 create_partitions
 
-LOOP=$(./fkem-img-mount.sh "$IMG")
+LOOP=$(./fkem-img-mount.sh -M "$IMG")
 trap on_error ERR
 format_partitions
 
