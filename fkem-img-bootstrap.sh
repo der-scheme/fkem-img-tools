@@ -6,7 +6,7 @@ set -e
 # Callback function that gets executed if the script terminates prematurely and
 # correctly unmounts the image file.
 on_error () {
-  ./fkem-img-free "$IMG"
+  ./fkem-img-free.sh "$IMG"
 }
 trap on_error ERR
 
@@ -57,6 +57,11 @@ while getopts ':hm:p:' opt; do
   esac
 done
 shift $(($OPTIND - 1))
+
+if [ "$2"x = x ]; then
+  print_usage
+fi
+
 IMG="$1"
 RELEASE_RPM="$2"
 
@@ -68,11 +73,7 @@ rpm --root "$MNT" -i $RELEASE_RPM
 
 # We import the GPG keys. Since RPM can't import the debug keys CentOS ships
 # with, we exclude those from globbing.
-# We also work around the fact that shopt will return a non-zero exit value if
-# extglob was disabled previously.
-shopt extglob > /dev/null || true
-rpm --root "$MNT" --import "$MNT"/etc/pki/rpm-gpg/!(*Debug*)
-shopt -u extglob > /dev/null || true
+bash -O extglob -c 'rpm --root "$MNT" --import "$MNT"/etc/pki/rpm-gpg/!(*Debug*)'
 
 # Install base packages
 dnf --assumeyes --installroot="$MNT" install \

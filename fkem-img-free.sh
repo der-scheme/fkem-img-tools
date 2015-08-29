@@ -39,8 +39,8 @@ IMG="$1"
 
 # Cleanup mounts. We do this by querying kpartx which will return the loop
 # devices for IMG.
-DEVS=$(kpartx -ls "$IMG" | awk '{ print $1 }')
-while IFS= read -r dev; do
+kpartx -ls "$IMG" | awk '{ print $1 }' | while IFS= read -r dev
+do
   # Query /proc/mounts for the mount point, and, if found, remove it.
   mp="$(grep $dev /proc/mounts | awk '{ print $2 }' || true)"
   if ! [ "$mp"x = x ]; then

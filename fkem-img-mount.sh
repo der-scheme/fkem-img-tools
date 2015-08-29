@@ -6,7 +6,7 @@ set -e
 # Callback function that gets executed if the script terminates prematurely and
 # correctly unmounts the image file.
 on_error () {
-  ./fkem-img-free "$IMG"
+  ./fkem-img-free.sh "$IMG"
 }
 trap on_error ERR
 
@@ -60,6 +60,11 @@ while getopts ':hm:M' opt; do
   esac
 done
 shift $(($OPTIND - 1))
+
+if [ "$1"x = x ]; then
+  print_usage
+fi
+
 IMG="$1"
 
 # Create loop device

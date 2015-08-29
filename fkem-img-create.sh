@@ -6,7 +6,7 @@ set -e
 # Callback function that gets executed if the script terminates prematurely and
 # correctly unmounts the image file.
 on_error () {
-  ./fkem-img-free "$IMG"
+  ./fkem-img-free.sh "$IMG"
 }
 # Note that in this script (only), the trap is set after looping the image.
 
@@ -108,13 +108,18 @@ while getopts ':b:s:i:h' opt; do
   esac
 done
 shift $(($OPTIND - 1))
+
+if [ "$1"x = x ]; then
+  print_usage
+fi
+
 IMG="$1"
 
 fallocate -l "$IMAGE_SIZE" "$IMG"
 fallocate -z -l  "$IMAGE_SIZE" "$IMG"
 create_partitions
 
-LOOP=$(./fkem-img-mount.sh "$IMG")
+LOOP=$(./fkem-img-mount.sh -M "$IMG")
 trap on_error ERR
 format_partitions
 
